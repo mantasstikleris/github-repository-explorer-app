@@ -1,0 +1,28 @@
+@import '../../common/constants';
+
+.RepositoryList {
+  display: flex;
+  flex-direction: column;
+
+  .SearchContainer {
+    display: flex;
+    justify-content: center;
+
+    .Search {
+      display: inline-flex;
+      align-items: center;
+
+      input {
+        border: 3px solid black;
+        border-radius: 20px;
+        font-family: $font;
+        font-size: 15px;
+        padding: 5px 10px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}
