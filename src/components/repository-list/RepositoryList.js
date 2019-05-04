@@ -2,18 +2,7 @@ import React, { useRef, useReducer, useEffect } from 'react';
 import './RepositoryList.scss';
 import {FontAwesomeIcon as Icon} from '@fortawesome/react-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
-
-const reducer = (state, action) => {
-    switch(action.type) {
-        case 'SET_SEARCH_QUERY':
-            return {
-            ...state,
-            searchQuery: action.searchQuery
-        };
-        default:
-            return state
-    }
-};
+import reducer from './reducer';
 
 const RepositoryList = () => {
     const searchRef = useRef('');
