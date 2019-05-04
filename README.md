@@ -1,4 +1,11 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To be able to fetch all needed endpoints for this application you need to:
+* Generate a token in https://github.com/settings/tokens with `public_repo` and `read:user` scopes;
+* Find `.env` file in root directory and add the token there;
+* With token you'll get a higher request limit and ability to fetch from endpoints which are secured.
+
+---
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
 
 ## Available Scripts
 

@@ -4,7 +4,7 @@ import {FontAwesomeIcon as Icon} from '@fortawesome/react-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import reducer from './reducer';
 import {useDebounce} from '../../common/utils';
-import {DEBOUNCE_DELAY, ITEMS_PER_PAGE} from '../../common/constants';
+import {DEBOUNCE_DELAY, ITEMS_PER_PAGE, GIT_AUTHORIZATION_HEADER} from '../../common/constants';
 import Loader from '../loader/Loader';
 import Error from '../error/Error';
 
@@ -26,7 +26,7 @@ const RepositoryList = () => {
 
         dispatch({type: 'SET_LOADING'});
 
-        fetch(`https://api.github.com/search/repositories?q=${state.searchQuery}&per_page=${ITEMS_PER_PAGE}`)
+        fetch(`https://api.github.com/search/repositories?q=${state.searchQuery}&per_page=${ITEMS_PER_PAGE}`, GIT_AUTHORIZATION_HEADER)
             .then(response => response.json())
             .then(data => dispatch({type: 'SET_REPOSITORIES', repositories: data.items}))
             .catch(error => dispatch({type: 'SET_ERROR', error: error.message}));
@@ -40,7 +40,7 @@ const RepositoryList = () => {
         }
 
         if (state.error) {
-            return <Error error={state.error} retry={loadRepositoryData} />
+            return <Error error={state.error} retry={loadRepositoryData}/>
         }
 
         return (
