@@ -18,3 +18,6 @@ export const useDebounce = (value, delay) => {
 
     return debouncedValue;
 };
+
+export const matchGithubResponseLinks = (link) => link.match(/\bhttps?:\/\/[^>]+/gi);
+export const getParamFromUrl = (param, url) => new URL(url).searchParams.get(param);

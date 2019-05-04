@@ -4,9 +4,10 @@ import {FontAwesomeIcon as Icon} from '@fortawesome/react-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import reducer from './reducer';
 import {useDebounce} from '../../common/utils';
-import {DEBOUNCE_DELAY, ITEMS_PER_PAGE, GIT_AUTHORIZATION_HEADER} from '../../common/constants';
+import {DEBOUNCE_DELAY} from '../../common/constants';
 import Loader from '../loader/Loader';
 import Error from '../error/Error';
+import {fetchRepositories} from '../../api';
 
 const RepositoryList = () => {
     const [state, dispatch] = useReducer(reducer, {
@@ -26,9 +27,8 @@ const RepositoryList = () => {
 
         dispatch({type: 'SET_LOADING'});
 
-        fetch(`https://api.github.com/search/repositories?q=${state.searchQuery}&per_page=${ITEMS_PER_PAGE}`, GIT_AUTHORIZATION_HEADER)
-            .then(response => response.json())
-            .then(data => dispatch({type: 'SET_REPOSITORIES', repositories: data.items}))
+        fetchRepositories(state.searchQuery)
+            .then(repositories => dispatch({type: 'SET_REPOSITORIES', repositories}))
             .catch(error => dispatch({type: 'SET_ERROR', error: error.message}));
     };
 
@@ -46,7 +46,7 @@ const RepositoryList = () => {
         return (
             <ul>
                 {
-                    state.repositories.map(repository => <li key={repository.id}>{repository.full_name}</li>)
+                    state.repositories.map(repository => <li key={repository.id}>{repository.name}</li>)
                 }
             </ul>
         );
