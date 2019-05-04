@@ -1,13 +1,15 @@
 import React, { useRef, useReducer, useEffect } from 'react';
 import './RepositoryList.scss';
 import {FontAwesomeIcon as Icon} from '@fortawesome/react-fontawesome';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import {faSearch, faStar as fasStar} from '@fortawesome/free-solid-svg-icons';
+import {faStar as farStar} from '@fortawesome/free-regular-svg-icons';
 import reducer from './reducer';
 import {useDebounce} from '../../common/utils';
 import {DEBOUNCE_DELAY} from '../../common/constants';
 import Loader from '../loader/Loader';
 import Error from '../error/Error';
 import {fetchRepositories} from '../../api';
+import Data from '../data/Data';
 
 const RepositoryList = () => {
     const [state, dispatch] = useReducer(reducer, {
@@ -43,13 +45,30 @@ const RepositoryList = () => {
             return <Error error={state.error} retry={loadRepositoryData}/>
         }
 
-        return (
-            <ul>
-                {
-                    state.repositories.map(repository => <li key={repository.id}>{repository.name}</li>)
-                }
-            </ul>
-        );
+        return state.repositories.map((repository) => (
+            <div className="RepositoryContainer" key={repository.id}>
+                <div className="Column">
+                    <div className="Row">
+                        <div className="Name Ellipsis">{repository.name}</div>
+                    </div>
+                    <div className="Row">
+                        {repository.license && <div className="Ellipsis">{repository.license}</div>}
+                        <div className="Ellipsis">{repository.language}</div>
+                    </div>
+                </div>
+                <div className="Column">
+                    <div className="Row">
+                        <div className="Description Ellipsis">{repository.description}</div>
+                    </div>
+                    <div className="Row">
+                        <Data data={repository}/>
+                    </div>
+                </div>
+                <div className="Column">
+                    <Icon icon={repository.starred ? fasStar : farStar}/>
+                </div>
+            </div>
+        ));
     };
 
     return (

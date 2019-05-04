@@ -1,0 +1,13 @@
+.DataContainer {
+  display: flex;
+
+  .SingleDataContainer {
+    svg {
+      padding-right: 5px;
+    }
+
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
+}
