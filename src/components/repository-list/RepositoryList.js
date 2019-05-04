@@ -3,12 +3,16 @@ import './RepositoryList.scss';
 import {FontAwesomeIcon as Icon} from '@fortawesome/react-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import reducer from './reducer';
+import {useDebounce} from '../../common/utils';
+import {DEBOUNCE_DELAY} from '../../common/constants';
 
 const RepositoryList = () => {
-    const searchRef = useRef('');
     const [state, dispatch] = useReducer(reducer, {
-       searchQuery: ''
+        searchQuery: ''
     });
+
+    const searchRef = useRef('');
+    const debounceSearchQuery = useDebounce(state.searchQuery, DEBOUNCE_DELAY);
 
     const loadRepositoryData = () => {
         if (state.searchQuery.length < 2) {
@@ -18,7 +22,7 @@ const RepositoryList = () => {
         console.log(state.searchQuery);
     };
 
-    useEffect(loadRepositoryData, [state.searchQuery]);
+    useEffect(loadRepositoryData, [debounceSearchQuery]);
 
     return (
         <div className="RepositoryList">
