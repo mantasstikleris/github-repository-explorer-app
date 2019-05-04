@@ -13,8 +13,15 @@ const reducer = (state, action) => {
             };
         case 'SET_LOADING':
             return {
-              ...state,
-              loading: true
+                ...state,
+                loading: true,
+                error: false
+            };
+        case 'SET_ERROR':
+            return {
+                ...state,
+                loading: false,
+                error: action.error
             };
         default:
             return state

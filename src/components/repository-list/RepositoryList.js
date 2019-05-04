@@ -6,12 +6,14 @@ import reducer from './reducer';
 import {useDebounce} from '../../common/utils';
 import {DEBOUNCE_DELAY, ITEMS_PER_PAGE} from '../../common/constants';
 import Loader from '../loader/Loader';
+import Error from '../error/Error';
 
 const RepositoryList = () => {
     const [state, dispatch] = useReducer(reducer, {
         searchQuery: '',
         repositories: [],
-        loading: false
+        loading: false,
+        error: null
     });
 
     const searchRef = useRef('');
@@ -26,7 +28,8 @@ const RepositoryList = () => {
 
         fetch(`https://api.github.com/search/repositories?q=${state.searchQuery}&per_page=${ITEMS_PER_PAGE}`)
             .then(response => response.json())
-            .then(data => dispatch({type: 'SET_REPOSITORIES', repositories: data.items}));
+            .then(data => dispatch({type: 'SET_REPOSITORIES', repositories: data.items}))
+            .catch(error => dispatch({type: 'SET_ERROR', error: error.message}));
     };
 
     useEffect(loadRepositoryData, [debounceSearchQuery]);
@@ -34,6 +37,10 @@ const RepositoryList = () => {
     const List = () => {
         if (state.loading) {
             return <Loader/>
+        }
+
+        if (state.error) {
+            return <Error error={state.error} retry={loadRepositoryData} />
         }
 
         return (
