@@ -12,12 +12,20 @@
       display: inline-flex;
       align-items: center;
 
+      svg {
+        position: relative;
+        left: 10px;
+      }
+
       input {
         border: 3px solid black;
         border-radius: 20px;
         font-family: $font;
         font-size: 15px;
-        padding: 5px 10px;
+        margin-left: -16px;
+        padding: 5px 10px 5px 30px;
+        background-color: transparent;
+        z-index: 1;
 
         &:focus {
           outline: none;
