@@ -1,0 +1,14 @@
+.LoaderContainer {
+  display: flex;
+  justify-content: center;
+
+  & > * {
+    animation: spinner .6s linear infinite;
+  }
+
+  @keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}

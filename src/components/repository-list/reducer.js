@@ -8,7 +8,13 @@ const reducer = (state, action) => {
         case 'SET_REPOSITORIES':
             return {
                 ...state,
-                repositories: action.repositories
+                repositories: action.repositories,
+                loading: false
+            };
+        case 'SET_LOADING':
+            return {
+              ...state,
+              loading: true
             };
         default:
             return state

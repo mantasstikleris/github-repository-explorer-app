@@ -5,11 +5,13 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import reducer from './reducer';
 import {useDebounce} from '../../common/utils';
 import {DEBOUNCE_DELAY, ITEMS_PER_PAGE} from '../../common/constants';
+import Loader from '../loader/Loader';
 
 const RepositoryList = () => {
     const [state, dispatch] = useReducer(reducer, {
         searchQuery: '',
-        repositories: []
+        repositories: [],
+        loading: false
     });
 
     const searchRef = useRef('');
@@ -20,6 +22,8 @@ const RepositoryList = () => {
             return;
         }
 
+        dispatch({type: 'SET_LOADING'});
+
         fetch(`https://api.github.com/search/repositories?q=${state.searchQuery}&per_page=${ITEMS_PER_PAGE}`)
             .then(response => response.json())
             .then(data => dispatch({type: 'SET_REPOSITORIES', repositories: data.items}));
@@ -27,13 +31,19 @@ const RepositoryList = () => {
 
     useEffect(loadRepositoryData, [debounceSearchQuery]);
 
-    const List = () => (
-        <ul>
-            {
-                state.repositories.map(repository => <li key={repository.id}>{repository.full_name}</li>)
-            }
-        </ul>
-    );
+    const List = () => {
+        if (state.loading) {
+            return <Loader/>
+        }
+
+        return (
+            <ul>
+                {
+                    state.repositories.map(repository => <li key={repository.id}>{repository.full_name}</li>)
+                }
+            </ul>
+        );
+    };
 
     return (
         <div className="RepositoryList">
