@@ -1,6 +1,7 @@
 To be able to fetch all needed endpoints for this application you need to:
 * Generate a token in https://github.com/settings/tokens with `public_repo` and `read:user` scopes;
 * Find `.env` file in root directory and add the token there;
+* Restart the application;
 * With token you'll get a higher request limit and ability to fetch from endpoints which are secured.
 
 ---
