@@ -10,9 +10,15 @@ const RepositoryList = () => {
        searchQuery: ''
     });
 
-    useEffect(() => {
+    const loadRepositoryData = () => {
+        if (state.searchQuery.length < 2) {
+            return;
+        }
+
         console.log(state.searchQuery);
-    }, [state]);
+    };
+
+    useEffect(loadRepositoryData, [state.searchQuery]);
 
     return (
         <div className="RepositoryList">
