@@ -5,6 +5,11 @@ const reducer = (state, action) => {
                 ...state,
                 searchQuery: action.searchQuery
             };
+        case 'SET_REPOSITORIES':
+            return {
+                ...state,
+                repositories: action.repositories
+            };
         default:
             return state
     }

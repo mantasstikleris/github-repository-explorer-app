@@ -4,11 +4,12 @@ import {FontAwesomeIcon as Icon} from '@fortawesome/react-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import reducer from './reducer';
 import {useDebounce} from '../../common/utils';
-import {DEBOUNCE_DELAY} from '../../common/constants';
+import {DEBOUNCE_DELAY, ITEMS_PER_PAGE} from '../../common/constants';
 
 const RepositoryList = () => {
     const [state, dispatch] = useReducer(reducer, {
-        searchQuery: ''
+        searchQuery: '',
+        repositories: []
     });
 
     const searchRef = useRef('');
@@ -19,10 +20,20 @@ const RepositoryList = () => {
             return;
         }
 
-        console.log(state.searchQuery);
+        fetch(`https://api.github.com/search/repositories?q=${state.searchQuery}&per_page=${ITEMS_PER_PAGE}`)
+            .then(response => response.json())
+            .then(data => dispatch({type: 'SET_REPOSITORIES', repositories: data.items}));
     };
 
     useEffect(loadRepositoryData, [debounceSearchQuery]);
+
+    const List = () => (
+        <ul>
+            {
+                state.repositories.map(repository => <li key={repository.id}>{repository.full_name}</li>)
+            }
+        </ul>
+    );
 
     return (
         <div className="RepositoryList">
@@ -31,6 +42,9 @@ const RepositoryList = () => {
                     <Icon icon={faSearch}/>
                     <input placeholder="Search" ref={searchRef} onChange={() => dispatch({type: 'SET_SEARCH_QUERY', searchQuery: searchRef.current.value})}/>
                 </div>
+            </div>
+            <div className="ListContainer">
+                <List />
             </div>
         </div>
     );
