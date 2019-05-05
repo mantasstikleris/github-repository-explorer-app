@@ -24,7 +24,9 @@ function App() {
             error: null
         },
         chart: {
-            data: null
+            data: null,
+            loading: false,
+            error: null
         }
     });
 

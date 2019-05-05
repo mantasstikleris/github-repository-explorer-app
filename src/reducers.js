@@ -80,8 +80,35 @@ const reducer = (state, action) => {
                 ...state,
                 chart: {
                     ...state.chart,
-                    data: action.data
+                    data: action.data,
+                    loading: false
                 }
+            };
+        case 'SET_CHART_LOADING':
+            return {
+                ...state,
+                chart: {
+                    ...state.chart,
+                    loading: true,
+                    error: false
+                }
+            };
+        case 'SET_CHART_ERROR':
+            return {
+                ...state,
+                chart: {
+                    ...state.chart,
+                    loading: false,
+                    error: action.error
+                }
+            };
+        case 'CLEAR_CHART_DATA':
+            return {
+              ...state,
+              chart: {
+                  ...state.chart,
+                  data: null
+              }
             };
         default:
             return state

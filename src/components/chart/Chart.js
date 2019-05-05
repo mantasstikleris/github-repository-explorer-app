@@ -4,11 +4,16 @@ import {Line as LineChart} from 'react-chartjs-2';
 import {Context} from '../../App';
 import {fetchParticipation} from '../../api';
 import {createNumberSequenceArray} from '../../common/utils';
+import {CHART_OPTIONS} from '../../common/constants';
+import Loader from '../loader/Loader';
+import Error from '../error/Error';
 
 const Chart = () => {
     const {state: {chart, list: {clicked: repository}}, dispatch} = useContext(Context);
 
     const loadChartData = () => {
+        dispatch({type: 'SET_CHART_LOADING'});
+
         fetchParticipation(repository.apiUrl)
             .then(data => {
                 const issues = repository.issues === 0 ? 1 : repository.issues;
@@ -25,6 +30,9 @@ const Chart = () => {
 
                 dispatch({type: 'SET_CHART_DATA', data: chartData});
             })
+            .catch(error => dispatch({type: 'SET_CHART_ERROR', error: error.message}));
+
+        return () => dispatch({type: 'CLEAR_CHART_DATA'});
     };
 
     useEffect(loadChartData, [repository]);
@@ -32,7 +40,9 @@ const Chart = () => {
     return (
         <div className="Chart">
             <div className="Title">Effective hours spend per year</div>
-            {chart.data && <LineChart data={chart.data}/>}
+            {chart.loading && <Loader/>}
+            {chart.error && <Error error={chart.error} retry={loadChartData}/>}
+            {chart.data && <LineChart data={chart.data} options={CHART_OPTIONS}/>}
         </div>
     );
 };
