@@ -8,7 +8,6 @@ export const GIT_AUTHORIZATION_HEADER = {
 };
 
 export const CHART_OPTIONS = {
-    // animation: false,
     tooltips: {
         displayColors: false,
         callbacks: {
