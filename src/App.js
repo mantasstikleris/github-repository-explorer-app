@@ -1,19 +1,36 @@
-import React, {useState} from 'react';
+import React, {useReducer} from 'react';
 import './App.scss';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import RepositoryList from './components/repository-list/RepositoryList';
+import reducers from './reducers';
 
-const InnerRepository = ({repository}) => <div>{repository.name}</div>;
+const InnerRepository = ({state: {list: {repositories}}}) => <div>{repositories.clicked.name}</div>;
 
 function App() {
-    const [repository, setRepository] = useState(null);
+    const [state, dispatch] = useReducer(reducers, {
+        search: {
+            query: ''
+        },
+        list: {
+            repositories: {
+                loaded: [],
+                clicked: null
+            },
+            loading: false,
+            error: null
+        },
+    });
 
     return (
         <div className="App">
             <Router>
                 <Switch>
-                    <Route exact path="/" render={() => <RepositoryList setRepository={setRepository}/>}/>
-                    <Route path="/:id" render={() => (repository ? <InnerRepository repository={repository}/> : <Redirect to="/"/>)}/>
+                    <Route exact path="/" render={() => <RepositoryList state={state} dispatch={dispatch}/>}/>
+                    <Route path="/:id" render={
+                        () => state.list.repositories.clicked
+                            ? <InnerRepository state={state} dispatch={dispatch}/>
+                            : <Redirect to="/"/>
+                    }/>
                 </Switch>
             </Router>
         </div>
