@@ -6,7 +6,7 @@ import Error from '../error/Error';
 import Loader from '../loader/Loader';
 
 const StarButton = () => {
-    const {state: {list: { clicked: repository }, button}, dispatch} = useContext(Context);
+    const {state: {list: {clicked: repository}, button}, dispatch} = useContext(Context);
 
     const onButtonClick = () => {
         dispatch({type: 'SET_BUTTON_LOADING'});
