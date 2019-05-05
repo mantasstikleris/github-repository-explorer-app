@@ -8,7 +8,7 @@ import Data from '../data/Data';
 import StarButton from '../star-button/StarButton';
 
 const RepositoryView = () => {
-    const {state: {list: {clicked: repository}}} = useContext(Context);
+    const {state: {list: {clicked: repository}, button}} = useContext(Context);
 
     return (
         <div className="RepositoryView">
@@ -19,7 +19,7 @@ const RepositoryView = () => {
             <div className="RepositoryContainer">
                 <div className="Row">
                     <div className="Description Ellipsis">{repository.description}</div>
-                    <Icon icon={repository.starred ? fasStar : farStar}/>
+                    <Icon icon={button.starred ? fasStar : farStar}/>
                 </div>
                 <div className="Row">
                     <div className="Details">
