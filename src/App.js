@@ -18,6 +18,9 @@ function App() {
             loading: false,
             error: null
         },
+        button: {
+            starred: null
+        }
     });
 
     return (

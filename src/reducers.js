@@ -18,11 +18,16 @@ const reducer = (state, action) => {
                 }
             };
         case 'SET_REPOSITORY':
+            const clicked = state.list.loaded.find(repository => repository.id === action.id);
+
             return {
                 ...state,
                 list: {
                     ...state.list,
-                    clicked: state.list.loaded.find(repository => repository.id === action.id)
+                    clicked
+                },
+                button: {
+                    starred: clicked.starred
                 }
             };
         case 'SET_LIST_LOADING':
@@ -41,6 +46,14 @@ const reducer = (state, action) => {
                     ...state.list,
                     loading: false,
                     error: action.error
+                }
+            };
+        case 'SET_BUTTON_SUCCESS':
+            return {
+                ...state,
+                button: {
+                    ...state.button,
+                    starred: !state.button.starred
                 }
             };
         default:

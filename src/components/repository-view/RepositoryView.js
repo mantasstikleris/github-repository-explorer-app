@@ -7,12 +7,23 @@ import {Context} from '../../App';
 import Data from '../data/Data';
 
 const RepositoryView = () => {
-    const {state: {list: { clicked: repository }}} = useContext(Context);
+    const {state: {list: {clicked: repository}, button}, dispatch} = useContext(Context);
+
+    const StarButton = () => {
+        return (
+            <div className="StarButtonContainer">
+                <button onClick={() => dispatch({type: 'SET_BUTTON_SUCCESS'})}>
+                    {button.starred ? 'un-star' : 'star'}
+                </button>
+            </div>
+        );
+    };
 
     return (
         <div className="RepositoryView">
             <div className="HeaderContainer">
                 <div className="Name Ellipsis">{repository.name}</div>
+                <StarButton/>
             </div>
             <div className="RepositoryContainer">
                 <div className="Row">

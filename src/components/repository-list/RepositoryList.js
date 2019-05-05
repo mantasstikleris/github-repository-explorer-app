@@ -22,11 +22,11 @@ const RepositoryList = () => {
             return;
         }
 
-        dispatch('SET_LOADING');
+        dispatch({type: 'SET_LIST_LOADING'});
 
         fetchRepositories(search.query)
             .then(repositories => dispatch({type: 'SET_REPOSITORIES', repositories}))
-            .catch(error => dispatch({type: 'SET_ERROR', error: error.message}));
+            .catch(error => dispatch({type: 'SET_LIST_ERROR', error: error.message}));
     };
 
     useEffect(loadRepositoryData, [debounceSearchQuery]);
