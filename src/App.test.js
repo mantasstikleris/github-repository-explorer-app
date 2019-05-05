@@ -107,7 +107,6 @@ describe('<RepositoryList/>', () => {
     expect(wrapper.find('.RepositoryContainer')).toHaveLength(state.list.loaded.length);
   });
 
-  // TODO: Rewrite
   it('fetches on search query', async () => {
     const state = {
       ...defaultState,
