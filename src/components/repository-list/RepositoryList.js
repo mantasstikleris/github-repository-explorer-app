@@ -10,8 +10,9 @@ import Loader from '../loader/Loader';
 import Error from '../error/Error';
 import {fetchRepositories} from '../../api';
 import Data from '../data/Data';
+import {Link} from 'react-router-dom';
 
-const RepositoryList = () => {
+const RepositoryList = ({setRepository}) => {
     const [state, dispatch] = useReducer(reducer, {
         searchQuery: '',
         repositories: [],
@@ -37,6 +38,10 @@ const RepositoryList = () => {
     useEffect(loadRepositoryData, [debounceSearchQuery]);
 
     const List = () => {
+        const onRepositoryClick = (id) => {
+            setRepository(state.repositories.find(repository => repository.id === id));
+        };
+
         if (state.loading) {
             return <Loader/>
         }
@@ -45,30 +50,36 @@ const RepositoryList = () => {
             return <Error error={state.error} retry={loadRepositoryData}/>
         }
 
-        return state.repositories.map((repository) => (
-            <div className="RepositoryContainer" key={repository.id}>
-                <div className="Column">
-                    <div className="Row">
-                        <div className="Name Ellipsis">{repository.name}</div>
+        return state.repositories.map((repository) => {
+            const {id, name, license, language, description, starred} = repository;
+
+            return (
+                <Link to={`/${id}`} key={id} onClick={onRepositoryClick(id)}>
+                    <div className="RepositoryContainer" key={id}>
+                        <div className="Column">
+                            <div className="Row">
+                                <div className="Name Ellipsis">{name}</div>
+                            </div>
+                            <div className="Row">
+                                {license && <div className="Ellipsis">{license}</div>}
+                                <div className="Ellipsis">{language}</div>
+                            </div>
+                        </div>
+                        <div className="Column">
+                            <div className="Row">
+                                <div className="Description Ellipsis">{description}</div>
+                            </div>
+                            <div className="Row">
+                                <Data data={repository}/>
+                            </div>
+                        </div>
+                        <div className="Column">
+                            <Icon icon={starred ? fasStar : farStar}/>
+                        </div>
                     </div>
-                    <div className="Row">
-                        {repository.license && <div className="Ellipsis">{repository.license}</div>}
-                        <div className="Ellipsis">{repository.language}</div>
-                    </div>
-                </div>
-                <div className="Column">
-                    <div className="Row">
-                        <div className="Description Ellipsis">{repository.description}</div>
-                    </div>
-                    <div className="Row">
-                        <Data data={repository}/>
-                    </div>
-                </div>
-                <div className="Column">
-                    <Icon icon={repository.starred ? fasStar : farStar}/>
-                </div>
-            </div>
-        ));
+                </Link>
+            );
+        });
     };
 
     return (

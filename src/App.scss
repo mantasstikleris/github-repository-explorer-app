@@ -1,6 +1,11 @@
 .App {
   padding: 30px 20%;
 
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
   .Ellipsis {
     overflow: hidden;
     white-space: nowrap;
