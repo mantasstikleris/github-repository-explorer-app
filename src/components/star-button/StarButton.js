@@ -17,7 +17,7 @@ const StarButton = () => {
     };
 
     return (
-        <div className="StarButtonContainer">
+        <div className="StarButton">
             {button.error ? <Error error={button.error}/> : null}
             {button.loading ? <Loader size="xs"/> : null}
             <button onClick={onButtonClick}>
