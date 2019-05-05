@@ -1,6 +1,6 @@
 To be able to fetch all needed endpoints for this application you need to:
 * Generate a token in https://github.com/settings/tokens with `public_repo` and `read:user` scopes;
-* Create `.env` file in `./src` and add `REACT_APP_GITHUB_TOKEN = {token}`;
+* Create `.env` file in root directory and add `REACT_APP_GITHUB_TOKEN = {token}`;
 * Restart the application;
 * With token you'll get a higher request limit and ability to fetch from endpoints which are secured.
 
