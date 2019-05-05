@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, {useRef, useEffect, useContext} from 'react';
 import './RepositoryList.scss';
 import {FontAwesomeIcon as Icon} from '@fortawesome/react-fontawesome';
 import {faSearch, faStar as fasStar} from '@fortawesome/free-solid-svg-icons';
@@ -10,8 +10,10 @@ import Error from '../error/Error';
 import {fetchRepositories} from '../../api';
 import Data from '../data/Data';
 import {Link} from 'react-router-dom';
+import {Context} from '../../App';
 
-const RepositoryList = ({state: {search, list}, dispatch}) => {
+const RepositoryList = () => {
+    const {state: {search, list}, dispatch} = useContext(Context);
     const searchRef = useRef('');
     const debounceSearchQuery = useDebounce(search.query, DEBOUNCE_DELAY);
 
