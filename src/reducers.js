@@ -75,6 +75,14 @@ const reducer = (state, action) => {
                     error: action.error
                 }
             };
+        case 'SET_CHART_DATA':
+            return {
+                ...state,
+                chart: {
+                    ...state.chart,
+                    data: action.data
+                }
+            };
         default:
             return state
     }

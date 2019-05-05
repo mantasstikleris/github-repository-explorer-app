@@ -49,6 +49,11 @@ export const fetchRepositories = (query) => {
         ))
 };
 
+export const fetchParticipation = (url) => {
+    return fetch(`${url}/stats/participation`, GIT_AUTHORIZATION_HEADER)
+        .then(response => response.json())
+};
+
 export const fetchAddRemoveStar = (repoName, method) => {
     return fetch(starredUrl(repoName), {method, ...GIT_AUTHORIZATION_HEADER})
 };

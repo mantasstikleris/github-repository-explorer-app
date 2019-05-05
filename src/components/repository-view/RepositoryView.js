@@ -6,6 +6,7 @@ import {faStar as farStar} from '@fortawesome/free-regular-svg-icons';
 import {Context} from '../../App';
 import Data from '../data/Data';
 import StarButton from '../star-button/StarButton';
+import Chart from '../chart/Chart';
 
 const RepositoryView = () => {
     const {state: {list: {clicked: repository}, button}} = useContext(Context);
@@ -29,6 +30,7 @@ const RepositoryView = () => {
                     <Data data={repository}/>
                 </div>
             </div>
+            <Chart/>
         </div>
     );
 };

@@ -22,6 +22,9 @@ function App() {
             starred: null,
             loading: false,
             error: null
+        },
+        chart: {
+            data: null
         }
     });
 

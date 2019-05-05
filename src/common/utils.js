@@ -22,3 +22,4 @@ export const useDebounce = (value, delay) => {
 export const matchGithubResponseLinks = (link) => link.match(/\bhttps?:\/\/[^>]+/gi);
 export const getParamFromUrl = (param, url) => new URL(url).searchParams.get(param);
 export const starredUrl = (repoName) => `https://api.github.com/user/starred/${repoName}`;
+export const createNumberSequenceArray = (length, startNumber) => Array.from({length}, (_, index) => index + startNumber);

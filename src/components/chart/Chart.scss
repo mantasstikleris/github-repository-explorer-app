@@ -1,0 +1,14 @@
+.Chart {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 3px solid black;
+  border-radius: 5px;
+
+  .Title {
+    font-size: 20px;
+    margin: 5px 0 20px;
+  }
+}
