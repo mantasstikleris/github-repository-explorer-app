@@ -1,7 +1,5 @@
 import {GIT_AUTHORIZATION_HEADER, ITEMS_PER_PAGE} from "./common/constants";
-import {matchGithubResponseLinks, getParamFromUrl} from './common/utils';
-
-const starredUrl = (repoName) => `https://api.github.com/user/starred/${repoName}`;
+import {matchGithubResponseLinks, getParamFromUrl, starredUrl} from './common/utils';
 
 const fetchIsRepositoryStarred = (repoName) => (
     fetch(starredUrl(repoName), GIT_AUTHORIZATION_HEADER)
@@ -49,4 +47,8 @@ export const fetchRepositories = (query) => {
                 })
             )
         ))
+};
+
+export const fetchAddRemoveStar = (repoName, method) => {
+    return fetch(starredUrl(repoName), {method, ...GIT_AUTHORIZATION_HEADER})
 };
