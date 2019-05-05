@@ -1,14 +1,9 @@
-import React, {useReducer, useContext} from 'react';
+import React, {useReducer} from 'react';
 import './App.scss';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import RepositoryList from './components/repository-list/RepositoryList';
+import RepositoryView from './components/repository-view/RepositoryView';
 import reducers from './reducers';
-
-const InnerRepository = () => {
-    const {state: {list}} = useContext(Context);
-
-    return <div>{list.clicked.name}</div>;
-};
 
 export const Context = React.createContext(null);
 
@@ -32,7 +27,7 @@ function App() {
                     <Context.Provider value={{state, dispatch}}>
                         <Route exact path="/" render={() => <RepositoryList/>}/>
                         <Route path="/:id" render={
-                            () => state.list.clicked ? <InnerRepository/> : <Redirect to="/"/>
+                            () => state.list.clicked ? <RepositoryView/> : <Redirect to="/"/>
                         }/>
                     </Context.Provider>
                 </Switch>
