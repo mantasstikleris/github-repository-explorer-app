@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useContext} from 'react';
+import React, {useEffect, useContext} from 'react';
 import './RepositoryList.scss';
 import {FontAwesomeIcon as Icon} from '@fortawesome/react-fontawesome';
 import {faSearch, faStar as fasStar} from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +14,6 @@ import {Context} from '../../App';
 
 const RepositoryList = () => {
     const {state: {search, list}, dispatch} = useContext(Context);
-    const searchRef = useRef('');
     const debounceSearchQuery = useDebounce(search.query, DEBOUNCE_DELAY);
 
     const loadRepositoryData = () => {
@@ -77,7 +76,10 @@ const RepositoryList = () => {
             <div className="SearchContainer">
                 <div className="Search">
                     <Icon icon={faSearch}/>
-                    <input placeholder="Search" ref={searchRef} onChange={() => dispatch({type: 'SET_SEARCH_QUERY', query: searchRef.current.value})}/>
+                    <input placeholder="Search"
+                           value={search.query}
+                           onChange={(e) => dispatch({type: 'SET_SEARCH_QUERY', query: e.target.value})}
+                    />
                 </div>
             </div>
             <div className="ListContainer">
