@@ -12,15 +12,13 @@ const SingleData = ({icon, value}) => {
     );
 };
 
-const Data = ({data: {stars, forks, contributors, issues}}) => {
-    return (
-        <div className="DataContainer">
-            <SingleData icon={fasStar} value={stars} />
-            <SingleData icon={faLevelUpAlt} value={forks} />
-            {contributors && <SingleData icon={faUsers} value={contributors} />}
-            <SingleData icon={faExclamation} value={issues} />
-        </div>
-    );
-};
+const Data = ({data: {stars, forks, contributors, issues}}) => (
+    <div className="DataContainer">
+        <SingleData icon={fasStar} value={stars}/>
+        <SingleData icon={faLevelUpAlt} value={forks}/>
+        {contributors && <SingleData icon={faUsers} value={contributors}/>}
+        <SingleData icon={faExclamation} value={issues}/>
+    </div>
+);
 
 export default Data;
