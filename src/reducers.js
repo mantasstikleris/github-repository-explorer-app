@@ -81,6 +81,7 @@ const reducer = (state, action) => {
                 chart: {
                     ...state.chart,
                     data: action.data,
+                    effectiveHours: Math.round(action.data.datasets[0].data.reduce((acc, cur) => acc + cur, 0)) || 0,
                     loading: false
                 }
             };

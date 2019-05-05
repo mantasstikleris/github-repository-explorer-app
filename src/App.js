@@ -26,7 +26,8 @@ function App() {
         chart: {
             data: null,
             loading: false,
-            error: null
+            error: null,
+            effectiveHours: null
         }
     });
 

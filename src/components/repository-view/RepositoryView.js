@@ -9,7 +9,7 @@ import StarButton from '../star-button/StarButton';
 import Chart from '../chart/Chart';
 
 const RepositoryView = () => {
-    const {state: {list: {clicked: repository}, button}} = useContext(Context);
+    const {state: {list: {clicked: repository}, button, chart}} = useContext(Context);
 
     return (
         <div className="RepositoryView">
@@ -27,7 +27,7 @@ const RepositoryView = () => {
                         {repository.license && <div className="Ellipsis">{repository.license}</div>}
                         <div className="Ellipsis">{repository.language}</div>
                     </div>
-                    <Data data={repository}/>
+                    <Data data={repository} effectiveHours={chart.effectiveHours}/>
                 </div>
             </div>
             <Chart/>
