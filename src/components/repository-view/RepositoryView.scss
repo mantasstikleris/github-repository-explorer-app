@@ -1,5 +1,3 @@
-@import '../../common/constants';
-
 .RepositoryView {
   .HeaderContainer {
     display: flex;
@@ -10,24 +8,6 @@
       font-weight: bold;
       font-size: 20px;
       color: dodgerblue;
-    }
-
-    .StarButtonContainer {
-      display: flex;
-
-      button {
-        font-family: $font;
-        font-size: 16px;
-        padding: 2px 15px;
-        border: 2px solid black;
-        background-color: darkseagreen;
-        box-shadow: 3px 3px 0 1px rgba(0, 0, 0, 1);
-        cursor: pointer;
-
-        &:focus {
-          outline: 0;
-        }
-      }
     }
   }
 

@@ -5,19 +5,10 @@ import {faStar as fasStar} from '@fortawesome/free-solid-svg-icons';
 import {faStar as farStar} from '@fortawesome/free-regular-svg-icons';
 import {Context} from '../../App';
 import Data from '../data/Data';
+import StarButton from '../star-button/StarButton';
 
 const RepositoryView = () => {
-    const {state: {list: {clicked: repository}, button}, dispatch} = useContext(Context);
-
-    const StarButton = () => {
-        return (
-            <div className="StarButtonContainer">
-                <button onClick={() => dispatch({type: 'SET_BUTTON_SUCCESS'})}>
-                    {button.starred ? 'un-star' : 'star'}
-                </button>
-            </div>
-        );
-    };
+    const {state: {list: {clicked: repository}}} = useContext(Context);
 
     return (
         <div className="RepositoryView">
