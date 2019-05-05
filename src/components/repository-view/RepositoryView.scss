@@ -1,0 +1,48 @@
+@import '../../common/constants';
+
+.RepositoryView {
+  .HeaderContainer {
+    display: flex;
+    margin-bottom: 10px;
+
+    .Name {
+      font-weight: bold;
+      font-size: 20px;
+      color: dodgerblue;
+    }
+  }
+
+  .RepositoryContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 3px solid black;
+    border-radius: 5px;
+
+    .Row {
+      display: flex;
+
+      &:nth-child(1) {
+        justify-content: space-between;
+
+        .Description {
+          padding-right: 40px;
+        }
+      }
+
+      &:nth-child(2) {
+        margin-top: 10px;
+
+        .Details {
+          display: flex;
+          width: 20%;
+          justify-content: space-between;
+        }
+
+        & > *:nth-child(2) {
+          padding: 0 40px;
+        }
+      }
+    }
+  }
+}

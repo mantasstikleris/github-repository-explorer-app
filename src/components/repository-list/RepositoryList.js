@@ -45,7 +45,7 @@ const RepositoryList = () => {
 
             return (
                 <Link to={`/${id}`} key={id} onClick={() => dispatch({type: 'SET_REPOSITORY', id})}>
-                    <div className="RepositoryContainer" key={id}>
+                    <div className="RepositoryContainer">
                         <div className="Column">
                             <div className="Row">
                                 <div className="Name Ellipsis">{name}</div>
