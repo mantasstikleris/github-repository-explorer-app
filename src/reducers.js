@@ -53,7 +53,26 @@ const reducer = (state, action) => {
                 ...state,
                 button: {
                     ...state.button,
-                    starred: !state.button.starred
+                    starred: !state.button.starred,
+                    loading: false
+                }
+            };
+        case 'SET_BUTTON_LOADING':
+            return {
+                ...state,
+                button: {
+                    ...state.button,
+                    loading: true,
+                    error: false
+                }
+            };
+        case 'SET_BUTTON_ERROR':
+            return {
+                ...state,
+                button: {
+                    ...state.button,
+                    loading: false,
+                    error: action.error
                 }
             };
         default:

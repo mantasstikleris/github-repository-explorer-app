@@ -19,7 +19,9 @@ function App() {
             error: null
         },
         button: {
-            starred: null
+            starred: null,
+            loading: false,
+            error: null
         }
     });
 
