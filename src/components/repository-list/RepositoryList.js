@@ -38,7 +38,7 @@ const RepositoryList = ({state: {search, list}, dispatch}) => {
             return <Error error={list.error} retry={loadRepositoryData}/>
         }
 
-        return list.repositories.loaded.map((repository) => {
+        return list.loaded.map((repository) => {
             const {id, name, license, language, description, starred} = repository;
 
             return (

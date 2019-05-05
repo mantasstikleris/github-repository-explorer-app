@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 import RepositoryList from './components/repository-list/RepositoryList';
 import reducers from './reducers';
 
-const InnerRepository = ({state: {list: {repositories}}}) => <div>{repositories.clicked.name}</div>;
+const InnerRepository = ({state: {list}}) => <div>{list.clicked.name}</div>;
 
 function App() {
     const [state, dispatch] = useReducer(reducers, {
@@ -12,10 +12,8 @@ function App() {
             query: ''
         },
         list: {
-            repositories: {
-                loaded: [],
-                clicked: null
-            },
+            loaded: [],
+            clicked: null,
             loading: false,
             error: null
         },
@@ -27,7 +25,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" render={() => <RepositoryList state={state} dispatch={dispatch}/>}/>
                     <Route path="/:id" render={
-                        () => state.list.repositories.clicked
+                        () => state.list.clicked
                             ? <InnerRepository state={state} dispatch={dispatch}/>
                             : <Redirect to="/"/>
                     }/>

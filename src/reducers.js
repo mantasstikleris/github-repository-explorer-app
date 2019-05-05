@@ -13,10 +13,7 @@ const reducer = (state, action) => {
                 ...state,
                 list: {
                     ...state.list,
-                    repositories: {
-                        ...state.list.repositories,
-                        loaded: action.repositories
-                    },
+                    loaded: action.repositories,
                     loading: false
                 }
             };
@@ -25,10 +22,7 @@ const reducer = (state, action) => {
                 ...state,
                 list: {
                     ...state.list,
-                    repositories: {
-                        ...state.list.repositories,
-                        clicked: state.list.repositories.loaded.find(repository => repository.id === action.id)
-                    }
+                    clicked: state.list.loaded.find(repository => repository.id === action.id)
                 }
             };
         case 'SET_LIST_LOADING':
