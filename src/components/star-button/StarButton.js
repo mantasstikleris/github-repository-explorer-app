@@ -18,8 +18,8 @@ const StarButton = () => {
 
     return (
         <div className="StarButton">
-            {button.error ? <Error error={button.error}/> : null}
-            {button.loading ? <Loader size="xs"/> : null}
+            {button.error && <Error error={button.error}/>}
+            {button.loading && <Loader size="xs"/>}
             <button onClick={onButtonClick}>
                 {button.starred ? 'un-star' : 'star'}
             </button>

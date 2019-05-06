@@ -40,9 +40,8 @@ const Chart = () => {
     return (
         <div className="Chart">
             <div className="Title">Effective hours spend per year</div>
-            {chart.loading && <Loader/>}
             {chart.error && <Error error={chart.error} retry={loadChartData}/>}
-            {chart.data && <LineChart data={chart.data} options={CHART_OPTIONS}/>}
+            {chart.loading ? <Loader/> : chart.data && <LineChart data={chart.data} options={CHART_OPTIONS}/>}
         </div>
     );
 };
